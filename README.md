@@ -56,7 +56,7 @@ id: integer // The id of the category in the internal database.
 
 name: string // The title of the category.
 
-“\*” GET/categories/{id}
+'\*' GET/categories/{id}
 
 The request returns an array of all products associated to the category id.
 
