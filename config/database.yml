@@ -19,7 +19,12 @@ default: &default
 
 development:
   <<: *default
-  database: StoreAPI_development
+  #database: StoreAPI_development
+  database: <%= Rails.application.credentials.dig(:mysql, :RDS_DB_NAME) %>
+  username: <%= Rails.application.credentials.dig(:mysql, :RDS_USERNAME) %>
+  password: <%= Rails.application.credentials.dig(:mysql, :RDS_PASSWORD) %>
+  host: <%= Rails.application.credentials.dig(:mysql, :RDS_HOSTNAME) %>
+  port: <%= Rails.application.credentials.dig(:mysql, :RDS_PORT) %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -50,6 +55,9 @@ test:
 #
 production:
   <<: *default
-  database: StoreAPI_production
-  username: StoreAPI
-  password: <%= ENV["STOREAPI_DATABASE_PASSWORD"] %>
+  adapter: mysql2
+  database: <%= Rails.application.credentials.dig(:mysql, :RDS_DB_NAME) %>
+  username: <%= Rails.application.credentials.dig(:mysql, :RDS_USERNAME) %>
+  password: <%= Rails.application.credentials.dig(:mysql, :RDS_PASSWORD) %>
+  host: <%= Rails.application.credentials.dig(:mysql, :RDS_HOSTNAME) %>
+  port: <%= Rails.application.credentials.dig(:mysql, :RDS_PORT) %>
